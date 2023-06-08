@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	httpSwagger "github.com/swaggo/http-swagger"
+	"log"
+	_ "strconv"
+
 	"net/http"
 )
 
@@ -16,12 +19,12 @@ type PublicisProject struct {
 
 var projectArray []PublicisProject
 
-// @title Orders API
+// @title Publicis Project API
 // @version 1.0
-// @description This is a sample serice for managing orders
+// @description This is a sample service for managing Publicis project
 // @termsOfService http://swagger.io/terms/
 // @contact.name API Support
-// @contact.email soberkoder@swagger.io
+// @contact.email visvishwa@gmail.com
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @host localhost:5000
@@ -42,6 +45,7 @@ func main() {
 	})
 
 	fmt.Println("Listening on 5000 port.....")
+	// Read-all
 	router.HandleFunc("/getTechnology", getFunction).Methods("GET")
 	router.HandleFunc("/createTechnology", createFunction).Methods("POST")
 	router.HandleFunc("/deleteTechnology/{project_name}", deleteFunction).Methods("DELETE")
@@ -50,7 +54,7 @@ func main() {
 	// Swagger
 	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
-	http.ListenAndServe(":5000", router)
+	log.Fatal(http.ListenAndServe(":5000", router))
 
 }
 
@@ -105,7 +109,7 @@ func createFunction(writer http.ResponseWriter, request *http.Request) {
 // @Tags Publicis project
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} Order
+// @Success 200 {array} PublicisProject
 // @Router /getTechnology [get]
 
 func getFunction(writer http.ResponseWriter, request *http.Request) {
