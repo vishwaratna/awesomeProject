@@ -46,10 +46,10 @@ func updateFunction(writer http.ResponseWriter, request *http.Request) {
 		if vals.Project == param["project_name"] {
 			projectArray = append(projectArray[:index], projectArray[index+1:]...)
 
-			var luxproj PublicisProject
-			json.NewDecoder(request.Body).Decode(&luxproj)
-			luxproj.Project = param["project_name"]
-			projectArray = append(projectArray, luxproj)
+			var psproj PublicisProject
+			json.NewDecoder(request.Body).Decode(&psproj)
+			psproj.Project = param["project_name"]
+			projectArray = append(projectArray, psproj)
 			json.NewEncoder(writer).Encode(projectArray)
 			return
 		}
