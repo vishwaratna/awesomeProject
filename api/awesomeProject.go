@@ -1,9 +1,10 @@
-package api
+package main
 
 import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"net/http"
 )
 
@@ -14,6 +15,17 @@ type PublicisProject struct {
 }
 
 var projectArray []PublicisProject
+
+// @title Orders API
+// @version 1.0
+// @description This is a sample serice for managing orders
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.email soberkoder@swagger.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:5000
+// @BasePath /
 
 func main() {
 
@@ -29,11 +41,14 @@ func main() {
 		Location:   "Australia",
 	})
 
-	fmt.Println("Listening on 8085 port.....")
+	fmt.Println("Listening on 5000 port.....")
 	router.HandleFunc("/getTechnology", getFunction).Methods("GET")
 	router.HandleFunc("/createTechnology", createFunction).Methods("POST")
 	router.HandleFunc("/deleteTechnology/{project_name}", deleteFunction).Methods("DELETE")
 	router.HandleFunc("/updateTechnology/{project_name}", updateFunction).Methods("PUT")
+
+	// Swagger
+	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
 	http.ListenAndServe(":5000", router)
 
@@ -83,6 +98,15 @@ func createFunction(writer http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(writer).Encode("Not Authenticated")
 
 }
+
+// getFunction godoc
+// @Summary Get details of all projects
+// @Description Get details of all projects
+// @Tags Publicis project
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} Order
+// @Router /getTechnology [get]
 
 func getFunction(writer http.ResponseWriter, request *http.Request) {
 
