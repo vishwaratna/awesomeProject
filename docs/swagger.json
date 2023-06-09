@@ -16,5 +16,143 @@
     },
     "host": "localhost:5000",
     "basePath": "/",
-    "paths": {}
+    "paths": {
+        "/createTechnology": {
+            "post": {
+                "description": "Create a new Project with the input paylod",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "Create a new Project",
+                "parameters": [
+                    {
+                        "description": "Create Project",
+                        "name": "project",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.PublicisProject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.PublicisProject"
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteTechnology/{project_name}": {
+            "delete": {
+                "description": "Delete the project corresponding to the input project_name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "Delete order identified by the given project_name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the project to be deleted",
+                        "name": "project_name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/getTechnology": {
+            "get": {
+                "description": "Get details of all Projects in Publicis Sapient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "Get details of all Projects in Publicis Sapient",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/main.PublicisProject"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/updateTechnology/{project_name}": {
+            "post": {
+                "description": "Update the project corresponding to the input project_name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "Update project identified by the given project_name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "project_name of the project to be updated",
+                        "name": "project_name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.PublicisProject"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.PublicisProject": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "technology": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

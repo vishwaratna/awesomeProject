@@ -1,4 +1,14 @@
 basePath: /
+definitions:
+  main.PublicisProject:
+    properties:
+      location:
+        type: string
+      project:
+        type: string
+      technology:
+        type: string
+    type: object
 host: localhost:5000
 info:
   contact:
@@ -11,5 +21,84 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Publicis Project API
   version: "1.0"
-paths: {}
+paths:
+  /createTechnology:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Project with the input paylod
+      parameters:
+      - description: Create Project
+        in: body
+        name: project
+        required: true
+        schema:
+          $ref: '#/definitions/main.PublicisProject'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.PublicisProject'
+      summary: Create a new Project
+      tags:
+      - project
+  /deleteTechnology/{project_name}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the project corresponding to the input project_name
+      parameters:
+      - description: name of the project to be deleted
+        in: path
+        name: project_name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Delete order identified by the given project_name
+      tags:
+      - project
+  /getTechnology:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all Projects in Publicis Sapient
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.PublicisProject'
+            type: array
+      summary: Get details of all Projects in Publicis Sapient
+      tags:
+      - project
+  /updateTechnology/{project_name}:
+    post:
+      consumes:
+      - application/json
+      description: Update the project corresponding to the input project_name
+      parameters:
+      - description: project_name of the project to be updated
+        in: path
+        name: project_name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.PublicisProject'
+      summary: Update project identified by the given project_name
+      tags:
+      - project
 swagger: "2.0"
