@@ -90,6 +90,7 @@ func deleteFunction(writer http.ResponseWriter, request *http.Request) {
 // @Success 200 {object} PublicisProject
 // @Router /createTechnology [post]
 func createFunction(writer http.ResponseWriter, request *http.Request) {
+	//check for Authorization
 	if request.Header.Get("Authorization") == "VishwaRatna" {
 		writer.Header().Set("Content-Type", "Application/Json")
 		var newProject PublicisProject
