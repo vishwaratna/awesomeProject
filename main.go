@@ -118,8 +118,6 @@ func getFunction(writer http.ResponseWriter, request *http.Request) {
 
 	json.NewEncoder(writer).Encode(projectArray)
 
-	fmt.Println("some")
-
 }
 
 func main() {
